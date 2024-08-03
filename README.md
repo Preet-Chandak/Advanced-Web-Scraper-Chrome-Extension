@@ -56,8 +56,5 @@ This Chrome extension provides an advanced web scraping and analysis tool. It al
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Disclaimer
 This tool is for educational purposes only. Always respect websites' robots.txt files and terms of service when scraping. Use responsibly and ethically.
