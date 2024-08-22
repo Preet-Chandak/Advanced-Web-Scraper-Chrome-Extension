@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Web Scraper Extension",
   "version": "1.0",
-  "description": "Scrape data from web pages",
+  "description": "A user-friendly web scraper extension for extracting data from web pages.",
   "permissions": [
     "activeTab",
     "scripting"
