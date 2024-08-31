@@ -16,6 +16,10 @@ const buttons = {
 
 Object.keys(buttons).forEach(id => {
   document.getElementById(id).addEventListener('click', () => {
+
+    localStorage.removeItem('scrapingResults');
+    document.getElementById('results').innerHTML = '';
+
     const customRule = id === 'scrape-custom' ? document.getElementById('custom-rule').value : null;
     scrapeData(buttons[id], customRule);
   });
@@ -27,6 +31,9 @@ function scrapeData(type, customRule = null) {
   toggleLoading(true);
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabId = tabs[0].id;
+
+    localStorage.removeItem('scrapingResults');
+
     chrome.scripting.executeScript({
       target: { tabId: tabId },
       function: scrapePage,
@@ -52,7 +59,7 @@ function toggleLoading(isLoading) {
 
 function scrapePage(type, customRule = null) {
   const data = { type, url: window.location.href, customRule };
-  return fetch('https://advanced-web-scraper-chrome-extension.onrender.com/scrape?' + new URLSearchParams(data))
+  return fetch('http://localhost:5000/scrape?' + new URLSearchParams(data))
     .then(response => response.json())
     .then(data => {
       if (data.error) {
@@ -66,9 +73,18 @@ function scrapePage(type, customRule = null) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const savedResults = localStorage.getItem('scrapingResults');
+  if (savedResults) {
+    displayResults(JSON.parse(savedResults));
+  }
+});
+
 function displayResults(results) {
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = '<h2 class="text-lg font-semibold text-gray-700 mb-2">Results</h2>';
+
+  localStorage.setItem('scrapingResults', JSON.stringify(results));
 
   if (results[0]?.error) {
     const errorP = document.createElement('p');

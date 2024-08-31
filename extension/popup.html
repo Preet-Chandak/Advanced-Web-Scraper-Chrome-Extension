@@ -16,6 +16,19 @@
     .transition-bg {
       transition: background-color 0.3s ease-in-out;
     }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .loader {
+      border-top-color: transparent; 
+      animation: spin 1s linear infinite; 
+    }
   </style>
   </head>
   <body class="bg-gray-100">
@@ -75,9 +88,10 @@
       </div>
     </div>
 
-    <div id="spinner" class="hidden">
-      <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+    <div id="spinner" class="hidden flex justify-center items-center">
+      <div class="loader ease-linear rounded-full border-8 border-t-8 border-blue-500 h-12 w-12 mb-4"></div>
     </div>
+    
 
     <div id="results" class="bg-white rounded-lg custom-shadow p-4 max-h-60 overflow-y-auto">
       <h2 class="text-lg font-semibold text-gray-700 mb-2">Results</h2>
