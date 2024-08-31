@@ -6,6 +6,12 @@ import logging
 import io
 import json
 
+import subprocess
+
+# Install Playwright browsers before starting the app
+subprocess.run(["playwright", "install", "chromium"])
+
+
 app = Flask(__name__)
 CORS(app)
 logging.basicConfig(level=logging.INFO)
