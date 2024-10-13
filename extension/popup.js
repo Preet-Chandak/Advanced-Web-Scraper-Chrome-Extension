@@ -59,7 +59,7 @@ function toggleLoading(isLoading) {
 
 function scrapePage(type, customRule = null) {
   const data = { type, url: window.location.href, customRule };
-  return fetch('http://localhost:5000/scrape?' + new URLSearchParams(data))
+  return fetch('https://flask-playwright-app-klro.onrender.com/scrape?' + new URLSearchParams(data))
     .then(response => response.json())
     .then(data => {
       if (data.error) {
